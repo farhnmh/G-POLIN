@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
                 isTransition = true;
             }
         }
-        else if (isTransition) 
+        else if (isTransition && gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone) 
         {
             gamePanelDetail[panelIndex].gamePanel.SetActive(true);
             if (gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone)
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
                 gamePanelDetail[panelIndex].transitionPanel.SetActive(false);
                 isTransition = false;
                 isPlay = true;
-            } 
+            }
         }
     }
 }

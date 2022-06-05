@@ -8,21 +8,24 @@ public class TransitionMonologueBox : MonoBehaviour
 {
     public bool isRun;
     public bool isDone;
-    public float delayFactor;
     public float moveSpeed;
     public GameObject nextButton;
     public GameObject carObject;
     public AnimationClip carAnimation;
+    public AudioSource audioSource;
     public List<GameObject> targetPos;
 
     void Awake()
     {
         GetComponent<Animator>().SetTrigger("isScaleUp");
-        StartCoroutine(ShowButton());
+        
+        nextButton.SetActive(false);
+        audioSource.Play();
     }
 
     void Update()
     {
+        nextButton.SetActive(!audioSource.isPlaying);
         nextButton.GetComponent<Button>().onClick.AddListener(OnClickButton);
 
         if (isRun && gameObject.transform.localScale.x <= 0)
@@ -32,13 +35,6 @@ public class TransitionMonologueBox : MonoBehaviour
             carObject.GetComponent<Animator>().SetTrigger("isMove");
             StartCoroutine(CarMovingDone(carAnimation.length));
         }
-    }
-
-    public IEnumerator ShowButton()
-    {
-        nextButton.SetActive(false);
-        yield return new WaitForSeconds(delayFactor);
-        nextButton.SetActive(true);
     }
 
     public IEnumerator CarMovingDone(float delay)

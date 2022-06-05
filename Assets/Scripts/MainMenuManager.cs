@@ -15,9 +15,8 @@ public class MainMenuManager : MonoBehaviour
         helloText.text = $"Hai, {playerData.playerName}!";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DoApplicationQuit()
     {
-        
+        Application.Quit();
     }
 }

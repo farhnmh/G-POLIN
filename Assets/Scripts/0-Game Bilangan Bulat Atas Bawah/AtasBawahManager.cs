@@ -13,10 +13,11 @@ public class AtasBawahManager : MonoBehaviour
     public GameObject transitionBefore;
     public List<GameObject> gamePanel;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        for (int i = 0; i < gameManager.gamePanelDetail.Count; i++)
+            if (gameObject == gameManager.gamePanelDetail[i].gamePanel)
+                transitionBefore = gameManager.gamePanelDetail[i].transitionPanel;
     }
 
     // Update is called once per frame

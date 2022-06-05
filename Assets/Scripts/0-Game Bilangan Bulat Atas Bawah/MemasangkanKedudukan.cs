@@ -28,6 +28,7 @@ public class MemasangkanKedudukan : MonoBehaviour
     public List<GameObject> notifikasiGroup;
 
     [Header("Element Attribute")]
+    public AudioClip instruksiSFX;
     public AudioClip correctSFX;
     public AudioClip wrongSFX;
     public List<GameObject> buttonTemp;
@@ -84,7 +85,10 @@ public class MemasangkanKedudukan : MonoBehaviour
                 }
 
                 if (!gameObject.GetComponent<AudioSource>().isPlaying)
+                {
                     gameObject.GetComponent<AudioSource>().Play();
+                    StartCoroutine(PlayInstruksi());
+                }
                 else
                 {
                     listIndex = 0;
@@ -108,6 +112,16 @@ public class MemasangkanKedudukan : MonoBehaviour
                 gameObject.SetActive(false);
                 gameManager.isPlay = false;
             }
+        }
+    }
+
+    public IEnumerator PlayInstruksi()
+    {
+        yield return new WaitUntil(() => !gameObject.GetComponent<AudioSource>().isPlaying);
+        if (totalDone != kedudukanList.Count)
+        {
+            gameObject.GetComponent<AudioSource>().clip = instruksiSFX;
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
