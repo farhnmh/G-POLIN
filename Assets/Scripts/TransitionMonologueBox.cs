@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TransitionMonologueBox : MonoBehaviour
 {
+    public bool withCar;
     public bool isRun;
     public bool isDone;
     public float moveSpeed;
@@ -28,12 +29,22 @@ public class TransitionMonologueBox : MonoBehaviour
         nextButton.SetActive(!audioSource.isPlaying);
         nextButton.GetComponent<Button>().onClick.AddListener(OnClickButton);
 
-        if (isRun && gameObject.transform.localScale.x <= 0)
-            isDone = true;
-        else if (isRun)
+        if (withCar)
         {
-            carObject.GetComponent<Animator>().SetTrigger("isMove");
-            StartCoroutine(CarMovingDone(carAnimation.length));
+            if (isRun && gameObject.transform.localScale.x <= 0)
+                isDone = true;
+            else if (isRun)
+            {
+                carObject.GetComponent<Animator>().SetTrigger("isMove");
+                StartCoroutine(CarMovingDone(carAnimation.length));
+            }
+        }
+        else
+        {
+            if (isRun && gameObject.transform.localScale.x <= 0)
+                isDone = true;
+            else if (isRun)
+                GetComponent<Animator>().SetTrigger("isScaleDown");
         }
     }
 

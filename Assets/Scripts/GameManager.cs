@@ -14,27 +14,36 @@ public class GameManager : MonoBehaviour
     public bool isPlay;
     public bool isTransition;
     public int panelIndex;
+    public GameObject finishPanel;
     public List<GamePanelDetail> gamePanelDetail;
 
     void Update()
     {
-        if (!isTransition && !isPlay)
+        if (panelIndex != gamePanelDetail.Count)
         {
-            if (!gamePanelDetail[panelIndex].transitionPanel.activeInHierarchy)
+            if (!isTransition && !isPlay)
             {
-                gamePanelDetail[panelIndex].transitionPanel.SetActive(true);
-                isTransition = true;
+                if (!gamePanelDetail[panelIndex].transitionPanel.activeInHierarchy)
+                {
+                    gamePanelDetail[panelIndex].transitionPanel.SetActive(true);
+                    isTransition = true;
+                }
+            }
+            else if (isTransition && gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone)
+            {
+                gamePanelDetail[panelIndex].gamePanel.SetActive(true);
+                if (gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone)
+                {
+                    gamePanelDetail[panelIndex].transitionPanel.SetActive(false);
+                    isTransition = false;
+                    isPlay = true;
+                }
             }
         }
-        else if (isTransition && gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone) 
+        else
         {
-            gamePanelDetail[panelIndex].gamePanel.SetActive(true);
-            if (gamePanelDetail[panelIndex].transitionPanel.GetComponent<TransitionMonologueBox>().isDone)
-            {
-                gamePanelDetail[panelIndex].transitionPanel.SetActive(false);
-                isTransition = false;
-                isPlay = true;
-            }
+            finishPanel.SetActive(true);
+            finishPanel.GetComponent<Animator>().SetTrigger("isScaleUp");
         }
     }
 }
