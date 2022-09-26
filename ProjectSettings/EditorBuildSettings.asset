@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/1-MainMenu.unity
     guid: 83288f630ca8d6b439c8f2e931bc7abc
   - enabled: 1
-    path: Assets/Scenes/2-GameScene.unity
+    path: Assets/Scenes/2-GameScene-Kedudukan.unity
     guid: 5755b855f8425b24d8978251264ee438
+  - enabled: 1
+    path: Assets/Scenes/2-GameScene-Kuliner.unity
+    guid: 29fae123437d76d47bfb4c9795a61275
+  - enabled: 1
+    path: Assets/Scenes/2-GameScene-PenyajianData.unity
+    guid: 46317f48d1d337348aa55e55b81a4967
+  - enabled: 1
+    path: Assets/Scenes/3-Evaluasi.unity
+    guid: dd098f84d4337d14e8ab03ce8fed7978
   m_configObjects: {}
